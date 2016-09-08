@@ -44,11 +44,7 @@ public class Regist extends HttpServlet {
             String url = (String)request.getParameter("registUrl");
             HashMap<String,RegistData> registDataRD = (HashMap<String,RegistData>)session.getAttribute("RegistData");
             if( url.length() > 4 &&
-                    (url.substring(url.length()-4).equals(".xml") ||
-                    url.substring(url.length()-4).equals(".rss") ||
-                    url.substring(url.length()-4).equals(".rdf") ||
-                    url.substring(url.length()-4).equals("rss1") ||
-                    url.substring(url.length()-4).equals("rss2") )){
+                    (url.substring(0,4).equals("http"))){
                 boolean chk = true;
                 for(Map.Entry<String,RegistData> val : registDataRD.entrySet()){
                     if(val.getValue().getRegistUrl().equals(url)){

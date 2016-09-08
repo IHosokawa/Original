@@ -36,7 +36,7 @@ public class Destination extends HttpServlet {
         HttpSession session = request.getSession();
         final String CREATE_URL = "https://slack.com/api/channels.create?token=";
         final String BASE_URL = "https://slack.com/api/chat.postMessage?token=";
-        String token = "xoxp-69365773543-69368379345-69310888915-ca61e3e8df";
+        String token = "";
         String channel = "";
         try {
             if(request.getParameter("root") != null ){
@@ -45,8 +45,17 @@ public class Destination extends HttpServlet {
                             request.getParameter("root").equals("new")){
                         token = (String)request.getParameter("token");
                         channel = (String)request.getParameter("channel");
+                        //データベースにチャンネルを登録
+                        UserData ud = (UserData)session.getAttribute("LoginData");
+                        UserDataDTO udd = new UserDataDTO();
+                        ud.UD2DTOMapping(udd);
+                        udd.setSlackChannel(channel);
+                        UserDataDAO.getInstance().channelInsert(udd);
+                        
+                        //チャンネル作成
                         URL createUrl = new URL( CREATE_URL + token + "&name=" + channel );
-                        UseSlack.getInstance().createChannel(createUrl); //チャンネル作成
+                        UseSlack.getInstance().createChannel(createUrl); 
+                        
                     }else if(request.getParameter("channel") != null &&
                             request.getParameter("root").equals("exist")){
                         token = (String)request.getParameter("token");
@@ -61,7 +70,9 @@ public class Destination extends HttpServlet {
             }
             
             request.getRequestDispatcher("/destination.jsp").forward(request, response);            
-        } finally {
+        } catch(Exception e) {
+            out.print("error : " + e.getMessage());
+        }finally {
             out.close();
         }
     }

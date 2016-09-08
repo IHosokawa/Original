@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  *
@@ -57,9 +57,9 @@ public class Admin extends HttpServlet {
                 
                 ud.DTO2UDMapping(udd);
                 //ログインしたユーザーの登録データを取得
-                HashMap<String,UserDataDTO> registData = UserDataDAO.getInstance().loginDataSeach(udd);
+                LinkedHashMap<String,UserDataDTO> registData = UserDataDAO.getInstance().loginDataSeach(udd);
                 //登録データから登録先の情報と必要な情報のみにマッピング
-                HashMap<String,RegistData> registDataRD = RegistData.getInstance().HMUDD2HMRDMappint(registData);
+                LinkedHashMap<String,RegistData> registDataRD = RegistData.getInstance().HMUDD2HMRDMappint(registData);
 
                 session.setAttribute("RegistData", registDataRD);
                 session.setAttribute("LoginData", ud);

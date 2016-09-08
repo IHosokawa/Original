@@ -111,8 +111,8 @@ public class RegistData {
     
     
     //HashMap<Integer,UserDataDTO>をHashMap<Integer,RegistData>へ変換
-    public HashMap<String,RegistData> HMUDD2HMRDMappint(HashMap<String,UserDataDTO> map){
-        HashMap<String,RegistData> rdMap = new HashMap<String,RegistData>();
+    public LinkedHashMap<String,RegistData> HMUDD2HMRDMappint(LinkedHashMap<String,UserDataDTO> map){
+        LinkedHashMap<String,RegistData> rdMap = new LinkedHashMap<String,RegistData>();
         for(Map.Entry<String,UserDataDTO> val:map.entrySet()){
             RegistData regD = new RegistData();
             RssSearch rs = new RssSearch();

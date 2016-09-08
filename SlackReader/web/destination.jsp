@@ -6,6 +6,14 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    boolean chk = false;
+    String chkcomment = "" ;
+    if(request.getAttribute("chk")!=null){
+        chk = true;
+        chkcomment = (String)request.getAttribute("chk");
+    }
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,6 +23,11 @@
         ここがｓぁｃｋの連携ページだ！！！
         ここで登録したチャンネルへ更新連絡が届くぞーッ！！！
         
+        <%
+            if(chk){
+                out.println(chkcomment);
+            }
+        %>
         <form action="Destination" method="POST">
             token : <input type="text" name="token" value="">
             チャンネル名 : <input type="text" name="channel" value="">

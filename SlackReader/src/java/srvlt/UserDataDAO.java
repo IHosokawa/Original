@@ -10,8 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import base.DBManager;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -82,6 +82,7 @@ public class UserDataDAO {
                 udd.setUserName(rs.getString("userName"));
                 udd.setPassword(rs.getString("password"));
                 udd.setDelFlg(rs.getInt("delFlg"));
+                udd.setSlackChannel("slackChannel");
             }
             return udd;
         }catch(SQLException sql_e){
@@ -95,11 +96,11 @@ public class UserDataDAO {
     }
     
     //ログイン成功したユーザーの登録データをHashMapで返す
-    public HashMap loginDataSeach(UserDataDTO udd)throws SQLException{
+    public LinkedHashMap<String,UserDataDTO> loginDataSeach(UserDataDTO udd)throws SQLException{
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        HashMap<String,UserDataDTO> map = new HashMap<String,UserDataDTO>();
+        LinkedHashMap<String,UserDataDTO> map = new LinkedHashMap<String,UserDataDTO>();
         try{
             con = DBManager.getConnection();
             ps = con.prepareStatement("SELECT * FROM regist_t WHERE userID = ?");
@@ -179,6 +180,26 @@ public class UserDataDAO {
                 System.out.println("Update Completed!!");
             }
         }catch (SQLException sql_e){
+            System.out.println(sql_e.getMessage());
+            throw new SQLException(sql_e);
+        }finally{
+            if(con != null){
+                con.close();
+            }
+        }
+    }
+    
+    public void channelInsert(UserDataDTO channel)throws SQLException{
+        Connection con = null;
+        PreparedStatement ps = null;
+        try{
+            con = DBManager.getConnection();
+            ps = con.prepareStatement("UPDATE user_t SET slackChannel = ? WHERE userID = ?");
+            ps.setString(1, channel.getSlackChannel());
+            ps.setInt(2, channel.getUserID());
+            ps.executeUpdate();
+            System.out.println("Update Completed!!");
+        }catch(SQLException sql_e){
             System.out.println(sql_e.getMessage());
             throw new SQLException(sql_e);
         }finally{
