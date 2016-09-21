@@ -26,7 +26,6 @@ public class task {
             @Override
             public void run() {
                 // ここに繰り返したい処理を書く
-                
                 System.out.println("action.");
             }
         },5*1000,5*1000);//実行感覚（ミリ秒）

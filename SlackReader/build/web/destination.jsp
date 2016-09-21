@@ -31,14 +31,8 @@
         <form action="Destination" method="POST">
             token : <input type="text" name="token" value="">
             チャンネル名 : <input type="text" name="channel" value="">
-            <input type="submit" value="チャンネル作成">
-            <input type="hidden" name="root" value="new">
-        </form>
-        <form action="Destination" method="POST">
-            token : <input type="text" name="token" value="">
-            既存チャンネル名<input type="text" name="channel" value="">
-            <input type="submit" value="チャンネル連携">
-            <input type="hidden" name="root" value="exist">
+            <input type="submit" name="makeRoot" value="チャンネル作成">
+            <input type="submit" name="updateRoot" value="チャンネル連携">
         </form>
     </body>
 </html>

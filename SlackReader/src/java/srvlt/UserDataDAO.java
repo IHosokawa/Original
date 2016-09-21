@@ -82,7 +82,8 @@ public class UserDataDAO {
                 udd.setUserName(rs.getString("userName"));
                 udd.setPassword(rs.getString("password"));
                 udd.setDelFlg(rs.getInt("delFlg"));
-                udd.setSlackChannel("slackChannel");
+                udd.setSlackChannel(rs.getString("slackChannel"));
+                udd.setToken(rs.getString("token"));
             }
             return udd;
         }catch(SQLException sql_e){
@@ -194,9 +195,10 @@ public class UserDataDAO {
         PreparedStatement ps = null;
         try{
             con = DBManager.getConnection();
-            ps = con.prepareStatement("UPDATE user_t SET slackChannel = ? WHERE userID = ?");
+            ps = con.prepareStatement("UPDATE user_t SET slackChannel = ?,token = ? WHERE userID = ?");
             ps.setString(1, channel.getSlackChannel());
-            ps.setInt(2, channel.getUserID());
+            ps.setString(2, channel.getToken());
+            ps.setInt(3, channel.getUserID());
             ps.executeUpdate();
             System.out.println("Update Completed!!");
         }catch(SQLException sql_e){

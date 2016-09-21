@@ -63,6 +63,7 @@ public class Admin extends HttpServlet {
 
                 session.setAttribute("RegistData", registDataRD);
                 session.setAttribute("LoginData", ud);
+                session.setAttribute("LoginDataUdd", udd);
                 session.setAttribute("ac", (int) (Math.random() * 1000));
                 request.getRequestDispatcher("/admin.jsp").forward(request, response);
                         

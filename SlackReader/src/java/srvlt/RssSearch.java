@@ -30,11 +30,7 @@ public class RssSearch {
         RssData rd = new RssData();
         try {
             if(path != null || path.length() > 4 &&
-                    path.substring(path.length()-4).equals(".xml") ||
-                    path.substring(path.length()-4).equals(".rss") ||
-                    path.substring(path.length()-4).equals(".rdf") ||
-                    path.substring(path.length()-4).equals("rss1") ||
-                    path.substring(path.length()-4).equals("rss2") ){
+                    (path.substring(0,4).equals("http")) ){
                 DocumentBuilderFactory  factory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder         builder = factory.newDocumentBuilder();
                 Document                document = builder.parse(path);

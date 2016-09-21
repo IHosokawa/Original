@@ -17,6 +17,7 @@ public class UserDataDTO {
     private String password;
     private int delFlg;
     private String slackChannel;
+    private String token;
     
     public int getUserID(){
         return this.userID;
@@ -39,6 +40,13 @@ public class UserDataDTO {
         this.password = pass;
     }
     
+    public int getDelFlg(){
+        return this.delFlg;
+    }
+    public void setDelFlg(int del){
+        this.delFlg = del;
+    }
+    
     public String getSlackChannel(){
         return this.slackChannel;
     }
@@ -46,11 +54,11 @@ public class UserDataDTO {
         this.slackChannel = channel;
     }
     
-    public int getDelFlg(){
-        return this.delFlg;
+    public String getToken(){
+        return this.token;
     }
-    public void setDelFlg(int del){
-        this.delFlg = del;
+    public void setToken(String token){
+        this.token = token;
     }
     
     

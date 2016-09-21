@@ -12,6 +12,15 @@
         <title>お問い合わせフォーム</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <form action="Contact" method="POST">
+            <input type="text" name="title" value="">
+            <select name ="type">
+                <option value="" selected>----</option>
+                <option value="">ご意見</option>
+                <option value="">不具合報告</option>
+                <option value="">その他</option>
+            </select>
+            <textarea name="hobby" style="resize:none" wrap="hard"></textarea>
+        </form>
     </body>
 </html>

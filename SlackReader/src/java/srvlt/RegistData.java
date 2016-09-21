@@ -138,8 +138,8 @@ public class RegistData {
         
     }
     
-    public HashMap<String,UserDataDTO> HMRDM2HMUDDMappint(HashMap<String,RegistData> map){
-        HashMap<String,UserDataDTO> uddMap = new HashMap<String,UserDataDTO>();
+    public LinkedHashMap<String,UserDataDTO> HMRDM2HMUDDMappint(LinkedHashMap<String,RegistData> map){
+        LinkedHashMap<String,UserDataDTO> uddMap = new LinkedHashMap<String,UserDataDTO>();
         for(Map.Entry<String,RegistData> val : map.entrySet()){
             UserDataDTO udd = new UserDataDTO();
             udd.setUserID(val.getValue().getUserID());

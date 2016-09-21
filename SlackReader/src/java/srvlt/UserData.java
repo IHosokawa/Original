@@ -5,7 +5,6 @@
  */
 package srvlt;
 
-import java.util.ArrayList;
 
 /**
  *
@@ -20,7 +19,6 @@ public class UserData {
     private int registID;
     private String registUrl;
     private int registFlg;
-    private ArrayList al;
     
     public int getUserID(){
         return this.userID;

@@ -40,6 +40,10 @@
         <servlet-name>Logout</servlet-name>
         <servlet-class>srvlt.Logout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Reload</servlet-name>
+        <servlet-class>srvlt.Reload</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Reload</servlet-name>
+        <url-pattern>/Reload</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

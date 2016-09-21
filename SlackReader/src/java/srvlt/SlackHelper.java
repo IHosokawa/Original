@@ -12,7 +12,7 @@ package srvlt;
 public class SlackHelper {
     
     private final String INDEX_URL = "/index.jsp";
-    private final String CONTACT_URL = "/contact.jsp";
+    private final String CONTACT_URL = "/SlackReader/contact.jsp";
     
     public static SlackHelper getInstance(){
         return new SlackHelper();

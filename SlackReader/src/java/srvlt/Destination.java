@@ -39,28 +39,35 @@ public class Destination extends HttpServlet {
         String token = "";
         String channel = "";
         try {
-            if(request.getParameter("root") != null ){
+            /**
+             * makeRoot:新しくチャンネルを作ったときに何か入っている
+             * updateRoot:既存チャンネルにログを流そうとしたときに
+             * token:Userの入力したSlackToken
+             * channel:Userの入力したチャンネル名
+             */
+            if(request.getParameter("makeRoot") != null ||
+                    request.getParameter("updateRoot") != null){
                 if(request.getParameter("token") != null ){
-                    if(request.getParameter("channel") != null &&
-                            request.getParameter("root").equals("new")){
-                        token = (String)request.getParameter("token");
+                    if(request.getParameter("channel") != null){
                         channel = (String)request.getParameter("channel");
+                        token = (String)request.getParameter("token");
                         //データベースにチャンネルを登録
                         UserData ud = (UserData)session.getAttribute("LoginData");
                         UserDataDTO udd = new UserDataDTO();
                         ud.UD2DTOMapping(udd);
                         udd.setSlackChannel(channel);
+                        udd.setToken(token);
                         UserDataDAO.getInstance().channelInsert(udd);
                         
-                        //チャンネル作成
-                        URL createUrl = new URL( CREATE_URL + token + "&name=" + channel );
-                        UseSlack.getInstance().createChannel(createUrl); 
-                        
-                    }else if(request.getParameter("channel") != null &&
-                            request.getParameter("root").equals("exist")){
-                        token = (String)request.getParameter("token");
-                        channel = (String)request.getParameter("channel");
-                        URL url = new URL( BASE_URL + token + "&channel=" + channel );
+                        if( request.getParameter("makeRoot") != null ){
+                            //チャンネル作成
+                            URL createUrl = new URL( CREATE_URL + token + "&name=" + channel );
+                            UseSlack.getInstance().createChannel(createUrl);
+                            request.setAttribute("chk", "Slackにチャンネルを作成しました。");
+
+                        }else if( request.getParameter("updateRoot") != null ){
+                            request.setAttribute("chk", "登録情報を更新しました。");
+                        }
                     }else{
                         request.setAttribute("chk", "チャンネル名が入力されていません。");
                     }
